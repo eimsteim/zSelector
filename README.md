@@ -39,8 +39,8 @@ $(function(){
 * 很抱歉，目前暂不支持远程数据源的调用。
 
 5、对data.js的数据格式说明：
-1）name		- 将作为内容显示在option中
-2）id		- 将作为option的ID
-3）zipcode	- 非常重要的一个字段，用于构建哈希表索引，在这里我使用了邮编（因为是用来做省市区级联），你也可以定义自己的zipcode，但前提是每个zipcode都必须唯一。
-4）selected 	- 标识该option是否被设置为selected
-5）children	- 拥有children的option，其children将被自动更新到下一级菜单
+* name		- 将作为内容显示在option中
+* id		- 将作为option的ID
+* zipcode	- 非常重要的一个字段，用于构建哈希表索引，在这里我使用了邮编（因为是用来做省市区级联），你也可以定义自己的zipcode，但前提是每个zipcode都必须唯一。
+* selected 	- 标识该option是否被设置为selected
+* children	- 拥有children的option，其children将被自动更新到下一级菜单
