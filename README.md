@@ -39,7 +39,6 @@ $(function(){
 * 很抱歉，目前暂不支持远程数据源的调用。
 
 5、对data.js的数据格式说明：
-```html
 <table>
 	<tr>
 		<td style="text-align: center; font-weight: bold;">name</td>
@@ -62,4 +61,3 @@ $(function(){
 		<td>拥有children的option，其children将被自动更新到下一级菜单</td>
 	</tr>
 </table>
-```
