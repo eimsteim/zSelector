@@ -41,23 +41,23 @@ $(function(){
 5、对data.js的数据格式说明：
 <table>
 	<tr>
-		<td style="text-align: center; font-weight: bold;">name</td>
+		<td style="text-align: center;"><b>name</b></td>
 		<td>将作为内容显示在option中</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; font-weight: bold;">id</td>
+		<td style="text-align: center;"><b>id</b></td>
 		<td>将作为option的ID</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; font-weight: bold;">zipcode</td>
+		<td style="text-align: center;"><b>zipcode</b></td>
 		<td>非常重要的一个字段，用于构建哈希表索引，在这里我使用了邮编（因为是用来做省市区级联），你也可以定义自己的zipcode，但前提是每个zipcode都必须唯一</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; font-weight: bold;">selected</td>
+		<td style="text-align: center;"><b>selected</b></td>
 		<td>标识该option是否被设置为selected</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; font-weight: bold;">children</td>
+		<td style="text-align: center;"><b>children</b></td>
 		<td>拥有children的option，其children将被自动更新到下一级菜单</td>
 	</tr>
 </table>
