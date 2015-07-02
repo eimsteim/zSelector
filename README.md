@@ -15,6 +15,7 @@ zSelector是一款简单的，基于jQuery开发的级联菜单插件，理论�
 2）内层select标签可以无限增加，但请保证每个select标签都包含idx属性，且idx的值是按顺序递增的，这点非常重要；
 
 3、在你的script脚本中添加如下代码：
+```javascript
     <br/>
     \<script type="text/javascript"\>
     <br/>
@@ -26,6 +27,7 @@ zSelector是一款简单的，基于jQuery开发的级联菜单插件，理论�
     <br/>
     \</script\>
     <br/>
+```
 传统的jQuery插件调用方式。
 
 4、demo中提供了一个默认的数据源data.js，数据格式为JSON，你可以自己研究一下data.js的格式，并通过如下形式定义自己的数据源：
