@@ -18,23 +18,19 @@ zSelector是一款简单的，基于jQuery开发的级联菜单插件，理论�
 
 3、在你的script脚本中添加如下代码：
 ```javascript
-<script type="text/javascript">
 $(function(){
     $('#demo_select').zSelector();
 });
-</script>
 ```
 传统的jQuery插件调用方式。
 
 4、demo中提供了一个默认的数据源data.js，数据格式为JSON，你可以自己研究一下data.js的格式，并通过如下形式定义自己的数据源：
 ```javascript
-<script type="text/javascript">
 $(function(){
 	$('#demo_select').zSelector({
 		data: 'my.js'
 	});
 });
-</script>
 ```
 * 很抱歉，目前暂不支持远程数据源的调用。
 
