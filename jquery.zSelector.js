@@ -16,6 +16,9 @@
 
 		var settings = $.extend(defaults, options);
 
+		//this
+		var _this = this;
+
 		//获取this下的所有select
 		var _selects = this.children('select');
 
@@ -33,7 +36,7 @@
 		});
 
 		//添加selector的onchange事件
-		$(_selects).change(function(){
+		$(_this).on('change', 'select', function(){
 			var key = $(this).children(':selected').attr('zipcode');
 			//从hash中获取数据
 			var obj = hash.get(key);
@@ -54,6 +57,7 @@
 				}
 
 			}
+
 		});
 
 		//递归处理
@@ -61,7 +65,11 @@
 		//index: 需要从哪一级selector开始更新（起始0）
 		var load = function(list, index){
 
-			if(type == 'dropdown') {
+			if(settings.type == 'dropdown') {
+
+				if(!_selects[index]) {
+					createNewDrop(_selects[index-1], index);
+				}
 
 				if(_selects[index]){ //防止selector下标越界
 					
@@ -90,9 +98,29 @@
 				}
 
 			}
-			else if(type == 'box') {
+			else if(settings.type == 'box') {
 
 			}
+		}
+
+		//创建新的下拉节点
+		//preNode是上一个节点
+		var createNewDrop = function(preDrop, index) { 
+
+			//如果_selects中一个都没有，那么新建一条
+			if(!preDrop) {
+				$(_this).append('<select idx='+0+'></select>');
+			} else {
+				$(preDrop).after('<select idx='+index+'></select>');
+			}
+
+			if(index == 0) {
+				_selects[index] = $(_this).children(':first');
+			} else {
+				_selects[index] = $(_selects[index-1]).next();
+			}
+			
+
 		}
 
 		//加载数据源（以后改为配置动态数据源）
