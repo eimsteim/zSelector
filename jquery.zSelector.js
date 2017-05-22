@@ -10,6 +10,7 @@
 	$.fn.zSelector = function(options){
 		//default settings
 		var defaults = {
+			type: 'dropdown',
 			data: 'data.js'					//数据源
 		};
 
@@ -59,30 +60,38 @@
 		//list: 数据源
 		//index: 需要从哪一级selector开始更新（起始0）
 		var load = function(list, index){
-			if(_selects[index]){ //防止selector下标越界
-				
-				$(_selects[index]).empty();
-				//
-				if(list.length === 0){
-					console.inf('list is empty');
+
+			if(type == 'dropdown') {
+
+				if(_selects[index]){ //防止selector下标越界
+					
+					$(_selects[index]).empty();
+					//
+					if(list.length === 0){
+						console.inf('list is empty');
+					}
+
+					$.each(list, function(i, n){
+						//为当前selector添加option
+						$(_selects[index]).append('<option id="'+n.id+'" zipcode="'+n.zipcode+'">'+n.name+'</option>')
+						
+						//加入hash
+						hash.put(n.zipcode, n);
+
+						if(n.selected === "true"){
+							//添加selected标记
+							$(_selects[index]).children('option[id=' + n.id + ']').attr('selected', 'true');
+							//只有当前节点有子节点时才执行递归
+							if(n.children){ 
+								load(n.children, index+1);
+							}
+						}
+					});
 				}
 
-				$.each(list, function(i, n){
-					//为当前selector添加option
-					$(_selects[index]).append('<option id="'+n.id+'" zipcode="'+n.zipcode+'">'+n.name+'</option>')
-					
-					//加入hash
-					hash.put(n.zipcode, n);
+			}
+			else if(type == 'box') {
 
-					if(n.selected === "true"){
-						//添加selected标记
-						$(_selects[index]).children('option[id=' + n.id + ']').attr('selected', 'true');
-						//只有当前节点有子节点时才执行递归
-						if(n.children){ 
-							load(n.children, index+1);
-						}
-					}
-				});
 			}
 		}
 
