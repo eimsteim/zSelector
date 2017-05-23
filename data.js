@@ -61,6 +61,7 @@
 		{
 			"name": "长沙",
 			"id": "1",
+			"zipcode": "410000",
 			"short": "CS",
 			"selected": "true",
 			"children": [{
@@ -84,6 +85,7 @@
 		{
 			"name": "株洲",
 			"id": "2",
+			"zipcode": "412000",
 			"short": "XG"
 		}
 	]
