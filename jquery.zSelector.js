@@ -10,10 +10,14 @@
 	$.fn.zSelector = function(options){
 		//default settings
 		var defaults = {
+			type: 'dropdown',
 			data: 'data.js'					//数据源
 		};
 
 		var settings = $.extend(defaults, options);
+
+		//this
+		var _this = this;
 
 		//获取this下的所有select
 		var _selects = this.children('select');
@@ -32,8 +36,8 @@
 		});
 
 		//添加selector的onchange事件
-		$(_selects).change(function(){
-			var key = $(this).children(':selected').attr('zipcode');
+		$(_this).on('change', 'select', function(){
+			var key = $(this).children(':selected').attr('zcode');
 			//从hash中获取数据
 			var obj = hash.get(key);
 
@@ -53,37 +57,70 @@
 				}
 
 			}
+
 		});
 
 		//递归处理
 		//list: 数据源
 		//index: 需要从哪一级selector开始更新（起始0）
 		var load = function(list, index){
-			if(_selects[index]){ //防止selector下标越界
-				
-				$(_selects[index]).empty();
-				//
-				if(list.length === 0){
-					console.inf('list is empty');
+
+			if(settings.type == 'dropdown') {
+
+				if(!_selects[index]) {
+					createNewDrop(_selects[index-1], index);
 				}
 
-				$.each(list, function(i, n){
-					//为当前selector添加option
-					$(_selects[index]).append('<option id="'+n.id+'" zipcode="'+n.zipcode+'">'+n.name+'</option>')
+				if(_selects[index]){ //防止selector下标越界
 					
-					//加入hash
-					hash.put(n.zipcode, n);
-
-					if(n.selected === "true"){
-						//添加selected标记
-						$(_selects[index]).children('option[id=' + n.id + ']').attr('selected', 'true');
-						//只有当前节点有子节点时才执行递归
-						if(n.children){ 
-							load(n.children, index+1);
-						}
+					$(_selects[index]).empty();
+					//
+					if(list.length === 0){
+						console.inf('list is empty');
 					}
-				});
+
+					$.each(list, function(i, n){
+						//为当前selector添加option
+						$(_selects[index]).append('<option id="'+n.id+'" zcode="'+n.zcode+'">'+n.name+'</option>')
+						
+						//加入hash
+						hash.put(n.zcode, n);
+
+						if(n.selected === "true"){
+							//添加selected标记
+							$(_selects[index]).children('option[id=' + n.id + ']').attr('selected', 'true');
+							//只有当前节点有子节点时才执行递归
+							if(n.children){ 
+								load(n.children, index+1);
+							}
+						}
+					});
+				}
+
 			}
+			else if(settings.type == 'box') {
+
+			}
+		}
+
+		//创建新的下拉节点
+		//preNode是上一个节点
+		var createNewDrop = function(preDrop, index) { 
+
+			//如果_selects中一个都没有，那么新建一条
+			if(!preDrop) {
+				$(_this).append('<select idx='+0+'></select>');
+			} else {
+				$(preDrop).after('<select idx='+index+'></select>');
+			}
+
+			if(index == 0) {
+				_selects[index] = $(_this).children(':first');
+			} else {
+				_selects[index] = $(_selects[index-1]).next();
+			}
+			
+
 		}
 
 		//加载数据源（以后改为配置动态数据源）

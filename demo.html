@@ -7,16 +7,19 @@
 	<script type="text/javascript" src="jquery.zSelector.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		$('#demo_select').zSelector();
+		$('#demo_drop').zSelector({
+			type: 'dropdown'
+		});
+
+		$('#demo_box').zSelector({
+			type: 'box'
+		});
 	});
 		
 	</script>
 </head>
 <body>
-	<div id="demo_select">
-		<select idx="0"></select>
-		<select idx="1"></select>
-		<select idx="2"></select>
-	</div>
+	<div id="demo_drop"></div>
+	<div id="demo_box"></div>
 </body>
 </html>
